@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --carbon: #070705;
+  --ink: #10100d;
+  --paper: #f4efe4;
+  --bone: #d8d0bf;
+  --wire: #d4a935;
+  --volt: #b7ff4a;
+  --signal: #ff6b35;
+  --brick: #a83228;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--carbon);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 12% 6%, rgba(183, 255, 74, 0.12), transparent 24rem),
+    radial-gradient(circle at 86% 12%, rgba(255, 107, 53, 0.12), transparent 22rem),
+    linear-gradient(180deg, #070705 0%, #0f0d09 42%, #070705 100%);
+  color: var(--paper);
+  font-family: Inter, Aptos, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  content: "";
+  opacity: 0.17;
+  background-image:
+    linear-gradient(rgba(244, 239, 228, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 239, 228, 0.1) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(180deg, black, transparent 92%);
+}
+
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  content: "";
+  opacity: 0.11;
+  background-image: url("/art/loomwire-atelier-hero.png");
+  background-position: center top;
+  background-size: cover;
+  filter: saturate(0.95) contrast(1.08);
+}
+
+::selection {
+  background: var(--volt);
+  color: var(--carbon);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+canvas {
+  max-width: 100%;
+}
+
+.atelier-shell {
+  width: min(1440px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.editorial-heading {
+  font-family: Didot, "Bodoni 72", Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.grid-band {
+  border-block: 1px solid rgba(244, 239, 228, 0.13);
+  background:
+    linear-gradient(90deg, rgba(244, 239, 228, 0.06), transparent 1px),
+    linear-gradient(rgba(244, 239, 228, 0.05), transparent 1px),
+    rgba(7, 7, 5, 0.62);
+  background-size: 44px 44px;
+}
+
+.paper-panel {
+  border: 1px solid rgba(244, 239, 228, 0.17);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(244, 239, 228, 0.1), rgba(244, 239, 228, 0.025)),
+    rgba(9, 9, 7, 0.82);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(18px);
+}
+
+.acid-edge {
+  position: relative;
+}
+
+.acid-edge::before {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  content: "";
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(183, 255, 74, 0.68), rgba(212, 169, 53, 0.48), rgba(255, 107, 53, 0.46));
+}
+
+.field {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid rgba(244, 239, 228, 0.17);
+  border-radius: 6px;
+  background: rgba(244, 239, 228, 0.065);
+  color: var(--paper);
+  outline: none;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.field:focus {
+  border-color: rgba(183, 255, 74, 0.82);
+  background: rgba(244, 239, 228, 0.1);
+  box-shadow: 0 0 0 3px rgba(183, 255, 74, 0.09);
+}
+
+.field::placeholder {
+  color: rgba(216, 208, 191, 0.55);
+}
+
+.btn {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 6px;
+  border: 1px solid rgba(244, 239, 228, 0.18);
+  padding: 0.78rem 1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(183, 255, 74, 0.7);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--volt), var(--wire));
+  color: var(--carbon);
+}
+
+.btn-ghost {
+  background: rgba(244, 239, 228, 0.06);
+  color: var(--paper);
+}
+
+.score-ring {
+  background:
+    radial-gradient(circle at center, #080806 58%, transparent 59%),
+    conic-gradient(var(--volt) calc(var(--score) * 1%), rgba(244, 239, 228, 0.14) 0);
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
