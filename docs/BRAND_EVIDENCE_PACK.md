@@ -33,3 +33,13 @@ brand-evidence-pack/
 ## LOOMWIRE Principle
 
 Protect the idea before the world touches it.
+
+## Vault System
+
+The `/vault` page gives the Evidence Pack a working interface:
+
+- Unlock with a creator phrase.
+- Add evidence title, category, notes, and timestamp.
+- Store records locally in the browser.
+- Export the vault as JSON.
+- Lock the vault again after recording proof.

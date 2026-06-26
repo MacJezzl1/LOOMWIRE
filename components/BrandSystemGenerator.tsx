@@ -17,6 +17,7 @@ import {
   TriangleAlert
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { SaveToVaultButton } from "@/components/SaveToVaultButton";
 import {
   BrandBrief,
   BrandSystem,
@@ -564,6 +565,13 @@ export function BrandSystemGenerator() {
               <Download size={18} />
               Export evidence JSON
             </button>
+            <SaveToVaultButton
+              record={{
+                title: `${system.nameOptions[0]?.name || "Brand system"} generated in Atelier`,
+                category: "Brand name",
+                notes: `Generated brand system. Manifesto: ${system.manifesto}. Product drop: ${system.productDrop.name}. Social bio: ${system.socialBio}`
+              }}
+            />
             <div className="rounded-md border border-paper/10 bg-paper/[0.035] p-3 text-sm leading-relaxed text-bone">
               Social bio: {system.socialBio}
             </div>

@@ -7,12 +7,18 @@ LOOMWIRE is positioned as:
 
 ## MVP Flow
 
-1. Enter a raw brand idea.
-2. Choose industry, audience, style, target, product blank, mood, price level,
+1. Enter through the gallery-style homepage.
+2. Walk the dedicated pages for the Name Room, IP Room, Studio, Blank Room,
+   Lookbook Engine, Drop Room, Gallery, Cultural Map, Brand Critic, Agents,
+   Archive, and Vault.
+3. Enter a raw brand idea in the Atelier.
+4. Choose industry, audience, style, target, product blank, mood, price level,
    and long-term vision.
-3. Pick an AI lane: demo, OpenAI, Claude, OpenRouter, Groq, or Ollama.
-4. Generate a complete brand system.
-5. Export the evidence JSON.
+5. Pick an AI lane: demo, OpenAI, Claude, OpenRouter, Groq, or Ollama.
+6. Generate a complete brand system.
+7. Save the generated system, Cultural Map, Gallery artwork, or Brand Critic
+   report into the Creator Proof Vault.
+8. Unlock the Creator Proof Vault, timestamp evidence, and export JSON.
 
 ## Strong First Use Case
 
@@ -36,9 +42,30 @@ Output:
 - Social bio.
 - Brand DNA Score.
 - AI Brand Critic notes.
+- Creator Proof Vault record.
+- Cultural Map score and recommended room path.
+- Original gallery painting saved as proof.
 
 ## Original Visual Direction
 
 The site uses original generated artwork inspired by street-art posters, gallery
 installations, fashion archives, yellow evidence paper, signal green, black-box
 labs, and cultural product drops.
+
+## Page Structure
+
+- Home: cultural entrance.
+- Atelier: brand system generator.
+- Rooms: dedicated route for each major product room.
+- Gallery: original LOOMWIRE paintings for the site and GitHub showcase.
+- Cultural Map: interactive culture selector and score.
+- Brand Critic: working critique engine.
+- Vault: local proof timeline with artful padlock and JSON export.
+- Agents: multi-agent operating model.
+- Archive: museum memory and version history.
+
+## Original Paintings
+
+- `public/art/paintings/loomwire-name-room-painting.png`
+- `public/art/paintings/loomwire-cultural-map-painting.png`
+- `public/art/paintings/loomwire-drop-room-painting.png`
