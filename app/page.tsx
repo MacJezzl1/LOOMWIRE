@@ -102,6 +102,46 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-b border-paper/10 bg-paper/[0.025] py-16">
+        <div className="atelier-shell grid gap-8 lg:grid-cols-[0.72fr_1fr] lg:items-center">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-volt">
+              Official Mark
+            </p>
+            <h2 className="editorial-heading mt-3 text-4xl text-paper sm:text-6xl">
+              The identity now has its own object.
+            </h2>
+            <p className="mt-5 max-w-3xl text-base leading-8 text-bone">
+              The LOOMWIRE logo carries the wire aperture, technical grid, and
+              lime signal language across the product, vault, archive, and
+              GitHub showcase.
+            </p>
+            <Link className="btn btn-ghost mt-7" href="/gallery">
+              <Images size={18} />
+              View the Gallery
+            </Link>
+          </div>
+
+          <div className="relative overflow-hidden rounded-lg border border-wire/30 bg-carbon p-3 shadow-atelier">
+            <div className="relative aspect-square overflow-hidden rounded-md border border-paper/10">
+              <Image
+                src="/art/loomwire-logo.png"
+                alt="Official LOOMWIRE logo system with wire aperture and lime technical marks."
+                fill
+                sizes="(min-width: 1024px) 52vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute inset-x-6 bottom-6 flex items-center justify-between border-t border-paper/20 pt-3 text-[0.65rem] font-black uppercase tracking-[0.22em] text-volt">
+              <span>Build</span>
+              <span>Protect</span>
+              <span>Design</span>
+              <span>Release</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="grid-band py-16">
         <div className="atelier-shell">
           <div className="mb-10 grid gap-6 lg:grid-cols-[0.72fr_1fr] lg:items-end">

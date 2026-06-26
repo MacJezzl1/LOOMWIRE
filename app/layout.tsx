@@ -7,10 +7,14 @@ export const metadata: Metadata = {
   title: "LOOMWIRE | Build the Name. Protect the Idea.",
   description:
     "LOOMWIRE is an AI-powered brand operating system for creators, founders, artists, designers, musicians, fashion labels, and cultural builders.",
+  icons: {
+    icon: "/art/loomwire-logo.png",
+    apple: "/art/loomwire-logo.png"
+  },
   openGraph: {
     title: "LOOMWIRE",
     description: "Turn an idea into a protected cultural system.",
-    images: ["/art/loomwire-atelier-hero.png"]
+    images: ["/art/loomwire-logo.png"]
   }
 };
 

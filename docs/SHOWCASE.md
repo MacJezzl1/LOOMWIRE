@@ -52,6 +52,12 @@ The site uses original generated artwork inspired by street-art posters, gallery
 installations, fashion archives, yellow evidence paper, signal green, black-box
 labs, and cultural product drops.
 
+## Logo System
+
+The official LOOMWIRE logo is included at
+`public/art/loomwire-logo.png` and is used in the app header, homepage identity
+section, browser icon metadata, Open Graph metadata, and GitHub README preview.
+
 ## Page Structure
 
 - Home: cultural entrance.

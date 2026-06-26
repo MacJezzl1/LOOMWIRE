@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   Archive,
@@ -26,8 +27,14 @@ export function SiteHeader() {
     <header className="relative z-20 border-b border-paper/10 bg-carbon/80 backdrop-blur-xl">
       <div className="atelier-shell flex items-center justify-between gap-5 py-3">
         <Link href="/" className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-md border border-wire/50 bg-wire/10 text-sm font-black text-volt">
-            LW
+          <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md border border-wire/50 bg-carbon shadow-[0_0_32px_rgba(206,255,0,0.16)]">
+            <Image
+              src="/art/loomwire-logo.png"
+              alt="LOOMWIRE logo"
+              fill
+              sizes="48px"
+              className="object-cover"
+            />
           </span>
           <span className="min-w-0">
             <span className="block text-sm font-black uppercase tracking-[0.24em] text-paper">

@@ -7,6 +7,8 @@ fashion brands, artists, musicians, designers, and startups. It moves a raw
 idea through naming, IP preparation, visual identity, product blanks, lookbook
 creation, launch planning, and archive records.
 
+![Official LOOMWIRE logo system](public/art/loomwire-logo.png)
+
 ![LOOMWIRE original hero artwork](public/art/loomwire-atelier-hero.png)
 
 ## Preview
@@ -36,6 +38,8 @@ creation, launch planning, and archive records.
   local evidence timeline, timestamps, and JSON export.
 - Adds an original Gallery Wall with project-owned paintings and working
   download/save actions.
+- Adds the official LOOMWIRE logo system across the app shell, homepage,
+  browser metadata, and GitHub presentation.
 - Adds an interactive Cultural Map that scores cultural signal and saves the
   selected territories to the Vault.
 - Adds a working AI Brand Critic for name, audience, product, and copy checks.
