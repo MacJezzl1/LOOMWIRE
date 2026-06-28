@@ -90,6 +90,13 @@ const providers: {
   }
 ];
 
+type ProviderStatus = {
+  id: Provider;
+  serverKeyReady: boolean;
+  keyMode: "free" | "server-or-byo" | "local";
+  defaultModel: string;
+};
+
 const inputClass = "field px-3 py-2.5 text-sm";
 
 function Field({
@@ -170,6 +177,9 @@ export function BrandSystemGenerator() {
   const [system, setSystem] = useState<BrandSystem>(() =>
     generateLocalBrandSystem(defaultBrief)
   );
+  const [providerStatus, setProviderStatus] = useState<
+    Partial<Record<Provider, ProviderStatus>>
+  >({});
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("Demo engine ready.");
 
@@ -177,6 +187,55 @@ export function BrandSystemGenerator() {
     () => providers.find((item) => item.id === provider) || providers[0],
     [provider]
   );
+  const selectedProviderStatus = providerStatus[provider];
+
+  function providerNote(item: (typeof providers)[number]) {
+    const status = providerStatus[item.id];
+
+    if (item.id === "demo") {
+      return "Free local engine";
+    }
+
+    if (item.id === "ollama") {
+      return "Local machine";
+    }
+
+    if (status?.serverKeyReady) {
+      return "Server key ready";
+    }
+
+    return item.note;
+  }
+
+  useEffect(() => {
+    let mounted = true;
+
+    fetch("/api/providers")
+      .then((response) => response.json())
+      .then(
+        (data: {
+          providers?: ProviderStatus[];
+        }) => {
+          if (!mounted) {
+            return;
+          }
+
+          const nextStatus = Object.fromEntries(
+            (data.providers || []).map((item) => [item.id, item])
+          ) as Partial<Record<Provider, ProviderStatus>>;
+          setProviderStatus(nextStatus);
+        }
+      )
+      .catch(() => {
+        if (mounted) {
+          setMessage("Provider status could not load. Demo engine still works.");
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     const nextProvider = providers.find((item) => item.id === provider);
@@ -331,7 +390,9 @@ export function BrandSystemGenerator() {
                 }`}
               >
                 <span className="block text-sm font-black">{item.label}</span>
-                <span className="mt-1 block text-xs text-bone/70">{item.note}</span>
+                <span className="mt-1 block text-xs text-bone/70">
+                  {providerNote(item)}
+                </span>
               </button>
             ))}
           </div>
@@ -339,13 +400,21 @@ export function BrandSystemGenerator() {
           <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_0.8fr]">
             <label className="block min-w-0">
               <span className="mb-2 block text-[0.68rem] font-bold uppercase tracking-[0.18em] text-bone/70">
-                {selectedProvider.needsKey ? "User API key" : "Provider status"}
+                {selectedProvider.needsKey
+                  ? selectedProviderStatus?.serverKeyReady
+                    ? "Optional user API key"
+                    : "User API key"
+                  : "Provider status"}
               </span>
               <input
                 type={selectedProvider.needsKey ? "password" : "text"}
                 disabled={!selectedProvider.needsKey}
                 className={inputClass}
-                value={selectedProvider.needsKey ? apiKey : selectedProvider.note}
+                value={
+                  selectedProvider.needsKey
+                    ? apiKey
+                    : providerNote(selectedProvider)
+                }
                 onChange={(event) => setApiKey(event.target.value)}
               />
             </label>
@@ -370,7 +439,8 @@ export function BrandSystemGenerator() {
                 onChange={(event) => setRememberKey(event.target.checked)}
                 className="mt-1 accent-[#b7ff4a]"
               />
-              Remember this key in this browser only. Leave unchecked for session-only use.
+              Remember this key in this browser only. Leave empty to use the
+              hosted server key when one is configured.
             </label>
           ) : null}
         </div>

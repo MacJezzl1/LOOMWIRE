@@ -20,7 +20,9 @@ LOOMWIRE is positioned as:
    report into the Creator Proof Vault.
 8. Open the Launch Board to turn the latest Atelier system into release tasks,
    drop math, campaign readiness, export JSON, and Vault proof.
-9. Unlock the Creator Proof Vault, timestamp evidence, and export JSON.
+9. Open the Commerce Room to prepare a Shopify draft product kit, test a store
+   connection, export JSON, and save commerce proof.
+10. Unlock the Creator Proof Vault, timestamp evidence, and export JSON.
 
 ## Strong First Use Case
 
@@ -38,6 +40,7 @@ Output:
 - Trademark preparation checklist.
 - Moodboard and palette language.
 - Product drop idea.
+- Shopify-ready draft commerce kit.
 - Lookbook outline.
 - Website hero copy.
 - Launch plan.
@@ -70,6 +73,7 @@ section, browser icon metadata, Open Graph metadata, and GitHub README preview.
 - Cultural Map: interactive culture selector and score.
 - Brand Critic: working critique engine.
 - Launch Board: release planner with proof tasks, commerce math, and Vault save.
+- Commerce: Shopify draft product kit, store test, export, and Vault proof.
 - Vault: local proof timeline with artful padlock and JSON export.
 - Agents: multi-agent operating model.
 - Archive: museum memory and version history.

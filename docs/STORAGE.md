@@ -13,6 +13,10 @@ Storage layers:
 - **Netlify Blobs**: production server storage for records created on Netlify.
 - **Local file fallback**: `.loomwire-storage/` during local Next development.
 
+Commerce kits, launch proof notes, gallery saves, critiques, and cultural map
+decisions can all be saved as Vault records. Store tokens and AI keys are never
+saved to the Vault.
+
 ## API
 
 `GET /api/vault?creatorId=...`

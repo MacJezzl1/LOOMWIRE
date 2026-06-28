@@ -8,6 +8,7 @@ import {
   Images,
   LockKeyhole,
   Rocket,
+  ShoppingBag,
   Siren,
   Sparkles
 } from "lucide-react";
@@ -16,6 +17,7 @@ const navItems = [
   { href: "/atelier", label: "Atelier", icon: Sparkles },
   { href: "/rooms", label: "Rooms", icon: DoorOpen },
   { href: "/launch-board", label: "Launch", icon: Rocket },
+  { href: "/commerce", label: "Commerce", icon: ShoppingBag },
   { href: "/vault", label: "Vault", icon: LockKeyhole },
   { href: "/gallery", label: "Gallery", icon: Images },
   { href: "/cultural-map", label: "Map", icon: Compass },
@@ -51,7 +53,7 @@ export function SiteHeader() {
             <Link
               key={href}
               href={href}
-              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent px-3 text-xs font-bold uppercase tracking-[0.18em] text-bone/75 transition hover:border-paper/10 hover:bg-paper/[0.05] hover:text-volt"
+              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent px-2.5 text-xs font-bold uppercase tracking-[0.14em] text-bone/75 transition hover:border-paper/10 hover:bg-paper/[0.05] hover:text-volt"
             >
               <Icon size={14} />
               {label}

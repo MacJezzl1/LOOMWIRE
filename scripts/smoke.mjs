@@ -1,8 +1,9 @@
 import { spawn } from "node:child_process";
+import { createServer } from "node:net";
 
-const port = process.env.SMOKE_PORT || "3010";
-const baseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
 const shouldStartServer = !process.env.BASE_URL;
+const port = process.env.SMOKE_PORT || (shouldStartServer ? await getFreePort() : "");
+const baseUrl = process.env.BASE_URL || `http://127.0.0.1:${port}`;
 const routes = [
   "/",
   "/atelier",
@@ -18,12 +19,28 @@ const routes = [
   "/cultural-map",
   "/critic",
   "/launch-board",
+  "/commerce",
   "/agents",
   "/archive"
 ];
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function getFreePort() {
+  return new Promise((resolve, reject) => {
+    const server = createServer();
+
+    server.on("error", reject);
+    server.listen(0, "127.0.0.1", () => {
+      const address = server.address();
+      const nextPort =
+        address && typeof address === "object" ? String(address.port) : "3010";
+
+      server.close(() => resolve(nextPort));
+    });
+  });
 }
 
 async function fetchWithTimeout(url, options = {}) {
@@ -106,6 +123,74 @@ async function checkVaultApi() {
   return hasEntry ? [] : ["GET /api/vault did not return the saved smoke entry"];
 }
 
+async function checkProviderApi() {
+  const response = await fetchWithTimeout(`${baseUrl}/api/providers`);
+
+  if (!response.ok) {
+    return [`GET /api/providers returned ${response.status}`];
+  }
+
+  const payload = await response.json();
+  const ids = Array.isArray(payload.providers)
+    ? payload.providers.map((item) => item.id)
+    : [];
+
+  return ids.includes("demo") && ids.includes("openai")
+    ? []
+    : ["GET /api/providers did not return expected provider status"];
+}
+
+async function checkShopifyApi() {
+  const kit = {
+    platform: "shopify",
+    sourceBrandName: "LOOMWIRE Smoke",
+    productTitle: "LOOMWIRE Smoke DROP 001",
+    handle: "loomwire-smoke-drop-001",
+    vendor: "LOOMWIRE Smoke",
+    productType: "Cultural product",
+    descriptionHtml: "<p>Smoke test product.</p>",
+    tags: ["LOOMWIRE", "Smoke"],
+    variants: [
+      {
+        option1: "First Edition",
+        sku: "LOOMWIRE-SMOKE-001",
+        price: "120.00",
+        inventoryQuantity: 1
+      }
+    ],
+    launchCopy: ["Build", "Protect", "Release"],
+    checklist: ["Review before publishing."],
+    shopifyProduct: {
+      title: "LOOMWIRE Smoke DROP 001",
+      handle: "loomwire-smoke-drop-001",
+      vendor: "LOOMWIRE Smoke",
+      productType: "Cultural product",
+      descriptionHtml: "<p>Smoke test product.</p>",
+      status: "DRAFT",
+      tags: ["LOOMWIRE", "Smoke"],
+      seo: {
+        title: "LOOMWIRE Smoke DROP 001",
+        description: "Smoke test product."
+      }
+    }
+  };
+  const response = await fetchWithTimeout(`${baseUrl}/api/shopify`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "prepare", kit })
+  });
+
+  if (!response.ok) {
+    return [`POST /api/shopify prepare returned ${response.status}`];
+  }
+
+  const payload = await response.json();
+
+  return payload.product?.status === "DRAFT"
+    ? []
+    : ["POST /api/shopify prepare did not return a draft product payload"];
+}
+
 let server;
 
 try {
@@ -127,7 +212,12 @@ try {
     await waitForServer();
   }
 
-  const failures = [...(await checkRoutes()), ...(await checkVaultApi())];
+  const failures = [
+    ...(await checkRoutes()),
+    ...(await checkVaultApi()),
+    ...(await checkProviderApi()),
+    ...(await checkShopifyApi())
+  ];
 
   if (failures.length > 0) {
     throw new Error(failures.join("\n"));

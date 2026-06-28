@@ -7,6 +7,18 @@ import {
 } from "@/lib/loomwire";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const supportedProviders: Provider[] = [
+  "demo",
+  "openai",
+  "anthropic",
+  "openrouter",
+  "groq",
+  "ollama"
+];
+
+const AI_TIMEOUT_MS = 45000;
 
 type GenerateRequest = {
   brief: BrandBrief;
@@ -35,8 +47,32 @@ function extractJson(text: string) {
   throw new Error("AI response did not include JSON.");
 }
 
+async function fetchWithTimeout(
+  input: RequestInfo | URL,
+  init: RequestInit = {},
+  timeoutMs = AI_TIMEOUT_MS
+) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(input, {
+      ...init,
+      signal: controller.signal
+    });
+  } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") {
+      throw new Error("AI provider request timed out.");
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function callOpenAi(prompt: string, apiKey: string, model?: string) {
-  const response = await fetch("https://api.openai.com/v1/responses", {
+  const response = await fetchWithTimeout("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -52,6 +88,7 @@ async function callOpenAi(prompt: string, apiKey: string, model?: string) {
         },
         { role: "user", content: prompt }
       ],
+      max_output_tokens: 2800,
       temperature: 0.85
     })
   });
@@ -71,7 +108,7 @@ async function callOpenAi(prompt: string, apiKey: string, model?: string) {
 }
 
 async function callAnthropic(prompt: string, apiKey: string, model?: string) {
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
+  const response = await fetchWithTimeout("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
       "x-api-key": apiKey,
@@ -106,7 +143,7 @@ async function callOpenAiCompatible(
   apiKey: string,
   model: string
 ) {
-  const response = await fetch(endpoint, {
+  const response = await fetchWithTimeout(endpoint, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -137,7 +174,7 @@ async function callOpenAiCompatible(
 }
 
 async function callOllama(prompt: string, model?: string) {
-  const response = await fetch("http://127.0.0.1:11434/api/chat", {
+  const response = await fetchWithTimeout("http://127.0.0.1:11434/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -165,7 +202,7 @@ async function callOllama(prompt: string, model?: string) {
 export async function POST(request: Request) {
   const body = (await request.json()) as GenerateRequest;
   const brief = body.brief;
-  const provider = body.provider || "demo";
+  const provider = supportedProviders.includes(body.provider) ? body.provider : "demo";
 
   if (!brief) {
     return Response.json({ error: "Missing brief." }, { status: 400 });

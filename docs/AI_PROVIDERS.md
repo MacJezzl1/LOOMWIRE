@@ -2,6 +2,9 @@
 
 LOOMWIRE has two kinds of AI lanes.
 
+The UI calls `/api/providers` first. That endpoint reports whether each hosted
+provider has a server-side key configured, without exposing the key value.
+
 ## Free / No-Key Lanes
 
 **Demo Engine**
@@ -27,7 +30,9 @@ llama3.1
 ## Bring-Your-Own-Key Lanes
 
 Users can paste their own key in the UI for one request. If they opt in, the key
-is stored in browser localStorage on their own machine.
+is stored in browser localStorage on their own machine. If a deployment owner
+sets server-side keys, users can leave the key field empty and use the hosted
+provider lane.
 
 Supported lanes:
 
@@ -49,5 +54,7 @@ GROQ_API_KEY=
 
 - Do not commit `.env` files.
 - Do not paste full API keys into issues, pull requests, screenshots, or chat.
+- Provider requests time out and fall back to the demo engine so the app keeps
+  working even when a paid provider is unavailable.
 - The app treats IP output as preparation, not legal advice.
 - For real trademark work, use a qualified IP professional.

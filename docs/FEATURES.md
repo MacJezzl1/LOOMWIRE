@@ -15,9 +15,14 @@
 - Launch Board with latest Atelier-system import, editable release profile,
   milestone proof tasks, readiness scoring, drop math, JSON export, copy action,
   and Vault save action.
+- Commerce Room with Shopify-ready draft product kit, store connection test,
+  draft product creation, export/copy actions, variant notes, SEO, and Vault
+  save action.
 - Archive and Agent pages for product story and operating model.
-- Netlify release configuration, security headers, route smoke test, Vault API
-  smoke test, and clean npm audit.
+- AI provider readiness API for hosted server keys, BYO keys, local Ollama, and
+  the free demo engine.
+- Netlify release configuration, security headers, route smoke test, Vault API,
+  provider API, Shopify payload smoke tests, and clean npm audit.
 
 ## Original Site Art
 
@@ -35,5 +40,7 @@
 - Home -> Cultural Map -> Toggle territories -> Save to Vault.
 - Home -> Critic -> Change fields -> Copy Report -> Save to Vault.
 - Home -> Launch Board -> Toggle proof tasks -> Copy Brief -> Export -> Save to Vault.
+- Home -> Commerce -> Prepare payload -> Copy JSON -> Export kit -> Save to Vault.
 - Home -> Vault -> Unlock -> Seal Evidence -> Export -> Lock.
-- `npm run smoke` -> starts production server -> checks all routes -> verifies `/api/vault`.
+- `npm run smoke` -> starts production server -> checks all routes -> verifies
+  `/api/vault`, `/api/providers`, and `/api/shopify`.

@@ -29,6 +29,21 @@ GROQ_API_KEY=
 
 Do not commit real keys. Add them only in Netlify environment variables.
 
+## Optional Commerce Setting
+
+The Shopify connector uses each user's own store domain and Admin API token from
+the browser. No Shopify token is required in Netlify environment variables.
+
+You can pin the Admin API version used by `/api/shopify`:
+
+```bash
+SHOPIFY_ADMIN_API_VERSION=2026-04
+```
+
+The connector creates draft products only. Users should review media, variants,
+shipping, taxes, inventory, legal/IP checks, and publishing settings in Shopify
+before making a product live.
+
 ## Storage
 
 The Creator Proof Vault is local-first and release-ready:
@@ -55,6 +70,7 @@ npm audit
 
 `npm run smoke` starts `next start` on a temporary local port after a build,
 checks every route, and verifies that `/api/vault` can save and reload a record.
+It also verifies provider status and Shopify draft-payload preparation.
 
 To test an already-running deployment:
 

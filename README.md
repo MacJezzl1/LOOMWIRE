@@ -23,6 +23,8 @@ creation, launch planning, and archive records.
 | --- | --- | --- |
 | ![Gallery preview](docs/showcase/loomwire-gallery.png) | ![Cultural Map preview](docs/showcase/loomwire-cultural-map.png) | ![Brand Critic preview](docs/showcase/loomwire-critic.png) |
 
+![LOOMWIRE Commerce Room preview](docs/showcase/loomwire-commerce.png)
+
 ## Original Gallery
 
 | Name Room | Cultural Map | Drop Room |
@@ -45,10 +47,15 @@ creation, launch planning, and archive records.
 - Adds a working AI Brand Critic for name, audience, product, and copy checks.
 - Adds a Launch Board that turns the latest Atelier system into release tasks,
   readiness scoring, drop math, JSON export, and Vault proof.
+- Adds a Commerce Room that turns the latest brand system into a Shopify-ready
+  draft product kit, store connection test, launch copy, tags, SEO, export, and
+  Vault proof.
 - Chooses a first product blank and turns it into a launchable drop.
 - Produces a lookbook outline, social bio, launch plan, cultural map, and Brand DNA Score.
 - Supports bring-your-own-key AI lanes for OpenAI, Claude, OpenRouter, and Groq.
 - Includes a free local demo engine and an Ollama lane for local models.
+- Shows AI provider readiness so users know when a hosted server key, BYO key,
+  free engine, or local model is being used.
 - Includes Netlify release config, security headers, smoke tests, and a
   local-first Vault API backed by Netlify Blobs in production.
 
@@ -68,6 +75,7 @@ creation, launch planning, and archive records.
 - `/cultural-map` - interactive cultural territory mapper.
 - `/critic` - working brand critic and scorecard.
 - `/launch-board` - release planner with tasks, scoring, commerce math, export, and Vault save.
+- `/commerce` - Shopify commerce connector for draft product kits and store tests.
 - `/agents` - multi-agent system.
 - `/archive` - version history and cultural memory.
 
@@ -81,6 +89,8 @@ creation, launch planning, and archive records.
 - **The Drop Room**: release plan, pricing logic, audience, and content calendar.
 - **The Archive**: version history for names, visuals, drops, and ownership proof.
 - **Creator Proof Vault**: locked local archive for evidence records and export.
+- **Commerce Room**: Shopify-ready draft product builder, connection test, export,
+  and launch evidence capture.
 
 ## AI Provider Model
 
@@ -90,6 +100,16 @@ can opt into browser-local key storage. Keys are not committed and are not
 required for the built-in demo engine.
 
 See [docs/AI_PROVIDERS.md](docs/AI_PROVIDERS.md) for the provider setup.
+
+## Commerce Connector
+
+The Commerce Room supports Shopify as the first commerce lane. Users provide
+their own Shopify store domain and Admin API token in the browser. LOOMWIRE can
+test the connection, prepare a draft product payload, create a draft product,
+export the kit, and save commerce proof to the Vault. Tokens are not stored on
+the server.
+
+See [docs/COMMERCE.md](docs/COMMERCE.md) for Shopify setup.
 
 ## Storage And Release
 
