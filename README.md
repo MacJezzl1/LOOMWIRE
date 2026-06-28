@@ -35,7 +35,7 @@ creation, launch planning, and archive records.
 - Builds a manifesto, positioning, color system, logo prompt, and website hero.
 - Creates an IP preparation checklist and creator evidence pack.
 - Adds a dedicated Creator Proof Vault with an artful padlock, unlock flow,
-  local evidence timeline, timestamps, and JSON export.
+  synced/local evidence timeline, timestamps, and JSON export.
 - Adds an original Gallery Wall with project-owned paintings and working
   download/save actions.
 - Adds the official LOOMWIRE logo system across the app shell, homepage,
@@ -49,6 +49,8 @@ creation, launch planning, and archive records.
 - Produces a lookbook outline, social bio, launch plan, cultural map, and Brand DNA Score.
 - Supports bring-your-own-key AI lanes for OpenAI, Claude, OpenRouter, and Groq.
 - Includes a free local demo engine and an Ollama lane for local models.
+- Includes Netlify release config, security headers, smoke tests, and a
+  local-first Vault API backed by Netlify Blobs in production.
 
 ## Pages
 
@@ -89,6 +91,11 @@ required for the built-in demo engine.
 
 See [docs/AI_PROVIDERS.md](docs/AI_PROVIDERS.md) for the provider setup.
 
+## Storage And Release
+
+- [docs/STORAGE.md](docs/STORAGE.md) explains the local-first Vault sync model.
+- [docs/RELEASE.md](docs/RELEASE.md) explains Netlify setup, env vars, and release checks.
+
 ## Getting Started
 
 ```bash
@@ -103,6 +110,8 @@ Then open [http://127.0.0.1:3000](http://127.0.0.1:3000).
 ```bash
 npm run typecheck
 npm run build
+npm run smoke
+npm audit
 ```
 
 ## CapeChain Labs

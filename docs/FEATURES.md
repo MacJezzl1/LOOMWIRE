@@ -5,7 +5,7 @@
 - Multi-page atelier architecture.
 - Brand System Generator with demo engine and BYO AI lanes.
 - Creator Proof Vault with local browser storage, lock/unlock state, timestamps,
-  and JSON export.
+  Netlify-ready sync API, lock/unlock state, timestamps, and JSON export.
 - Gallery Wall with original LOOMWIRE paintings, room links, download actions,
   and Vault save actions.
 - Cultural Map with selectable culture territories, signal score, recommended
@@ -16,6 +16,8 @@
   milestone proof tasks, readiness scoring, drop math, JSON export, copy action,
   and Vault save action.
 - Archive and Agent pages for product story and operating model.
+- Netlify release configuration, security headers, route smoke test, Vault API
+  smoke test, and clean npm audit.
 
 ## Original Site Art
 
@@ -34,3 +36,4 @@
 - Home -> Critic -> Change fields -> Copy Report -> Save to Vault.
 - Home -> Launch Board -> Toggle proof tasks -> Copy Brief -> Export -> Save to Vault.
 - Home -> Vault -> Unlock -> Seal Evidence -> Export -> Lock.
+- `npm run smoke` -> starts production server -> checks all routes -> verifies `/api/vault`.

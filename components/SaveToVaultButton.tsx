@@ -2,39 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { Archive, Check } from "lucide-react";
+import { saveVaultRecord } from "@/lib/vault-client";
+import type { VaultRecordInput } from "@/lib/vault-records";
 
-type VaultRecordInput = {
-  title: string;
-  category: string;
-  notes: string;
-};
-
-type VaultEntry = VaultRecordInput & {
-  id: string;
-  createdAt: string;
-};
-
-const storageKey = "loomwire-vault-entries";
-
-function readEntries(): VaultEntry[] {
-  try {
-    const stored = window.localStorage.getItem(storageKey);
-    return stored ? (JSON.parse(stored) as VaultEntry[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-export function saveVaultRecord(record: VaultRecordInput) {
-  const entry: VaultEntry = {
-    ...record,
-    id: crypto.randomUUID(),
-    createdAt: new Date().toISOString()
-  };
-  const entries = [entry, ...readEntries()];
-  window.localStorage.setItem(storageKey, JSON.stringify(entries));
-  return entry;
-}
+export { saveVaultRecord };
 
 export function SaveToVaultButton({
   record,
@@ -44,6 +15,7 @@ export function SaveToVaultButton({
   className?: string;
 }) {
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -54,19 +26,21 @@ export function SaveToVaultButton({
     <button
       type="button"
       className={className}
-      disabled={!ready}
-      onClick={() => {
-        if (!ready) {
+      disabled={!ready || saving}
+      onClick={async () => {
+        if (!ready || saving) {
           return;
         }
 
-        saveVaultRecord(record);
+        setSaving(true);
+        await saveVaultRecord(record);
         setSaved(true);
+        setSaving(false);
         window.setTimeout(() => setSaved(false), 1800);
       }}
     >
       {saved ? <Check size={18} /> : <Archive size={18} />}
-      {saved ? "Saved" : "Save to Vault"}
+      {saved ? "Saved" : saving ? "Saving" : "Save to Vault"}
     </button>
   );
 }

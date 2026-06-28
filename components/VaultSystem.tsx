@@ -13,14 +13,9 @@ import {
   Trash2,
   UnlockKeyhole
 } from "lucide-react";
-
-type VaultEntry = {
-  id: string;
-  title: string;
-  category: string;
-  notes: string;
-  createdAt: string;
-};
+import { loadVaultEntries, syncVaultEntries, writeLocalVaultEntries } from "@/lib/vault-client";
+import type { VaultEntry } from "@/lib/vault-records";
+import { sampleVaultEntries } from "@/lib/vault-records";
 
 const categories = [
   "Brand name",
@@ -29,25 +24,6 @@ const categories = [
   "Lookbook",
   "Domain / handle",
   "Launch proof"
-];
-
-const sampleEntries: VaultEntry[] = [
-  {
-    id: "seed-name",
-    title: "LOOMWIRE naming logic",
-    category: "Brand name",
-    notes:
-      "The name connects imagination to execution: loom as culture-making, wire as infrastructure.",
-    createdAt: "2026-06-26T04:00:00.000Z"
-  },
-  {
-    id: "seed-lookbook",
-    title: "Drop 001 lookbook direction",
-    category: "Lookbook",
-    notes:
-      "Black gallery, acid green signal, warm yellow evidence paper, street archive poster language.",
-    createdAt: "2026-06-26T04:20:00.000Z"
-  }
 ];
 
 function downloadVault(entries: VaultEntry[]) {
@@ -71,17 +47,14 @@ export function VaultSystem() {
   const [category, setCategory] = useState(categories[0]);
   const [notes, setNotes] = useState("");
   const [message, setMessage] = useState("Vault sealed.");
+  const [syncLabel, setSyncLabel] = useState("Loading storage.");
 
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem("loomwire-vault-entries");
-      const parsed = stored ? (JSON.parse(stored) as VaultEntry[]) : null;
-      setEntries(Array.isArray(parsed) && parsed.length > 0 ? parsed : sampleEntries);
-    } catch {
-      setEntries(sampleEntries);
-    } finally {
+    loadVaultEntries().then((result) => {
+      setEntries(result.entries);
+      setSyncLabel(result.synced ? "Synced storage" : "Local storage");
       setHydrated(true);
-    }
+    });
   }, []);
 
   useEffect(() => {
@@ -89,7 +62,7 @@ export function VaultSystem() {
       return;
     }
 
-    window.localStorage.setItem("loomwire-vault-entries", JSON.stringify(entries));
+    writeLocalVaultEntries(entries);
   }, [entries, hydrated]);
 
   const hash = useMemo(() => {
@@ -111,14 +84,14 @@ export function VaultSystem() {
     setMessage("Vault open. Record the proof while the idea is still warm.");
   }
 
-  function addEntry(event: FormEvent<HTMLFormElement>) {
+  async function addEntry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!title.trim() || !notes.trim()) {
       setMessage("Add a title and notes before sealing a record.");
       return;
     }
 
-    setEntries((current) => [
+    const nextEntries = [
       {
         id: crypto.randomUUID(),
         title: title.trim(),
@@ -126,11 +99,18 @@ export function VaultSystem() {
         notes: notes.trim(),
         createdAt: new Date().toISOString()
       },
-      ...current
-    ]);
+      ...entries
+    ];
+    setEntries(nextEntries);
+    const synced = await syncVaultEntries(nextEntries);
     setTitle("");
     setNotes("");
-    setMessage("Evidence sealed into the local vault.");
+    setSyncLabel(synced ? "Synced storage" : "Local storage");
+    setMessage(
+      synced
+        ? "Evidence sealed into the synced vault."
+        : "Evidence sealed locally. Server sync will retry on the next load."
+    );
   }
 
   return (
@@ -175,6 +155,9 @@ export function VaultSystem() {
             </div>
             <div className="rounded-md border border-volt/30 bg-volt/10 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-volt">
               Hash {hash}
+            </div>
+            <div className="rounded-md border border-paper/10 bg-paper/[0.045] px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-bone">
+              {syncLabel}
             </div>
           </div>
 
@@ -307,7 +290,10 @@ export function VaultSystem() {
                 type="button"
                 className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-bone/70 transition hover:text-signal"
                 onClick={() => {
-                  setEntries(sampleEntries);
+                  setEntries(sampleVaultEntries);
+                  syncVaultEntries(sampleVaultEntries).then((synced) =>
+                    setSyncLabel(synced ? "Synced storage" : "Local storage")
+                  );
                   setMessage("Vault reset to sample records.");
                 }}
               >

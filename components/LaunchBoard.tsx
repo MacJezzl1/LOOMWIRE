@@ -376,12 +376,13 @@ ${brandSystem.positioning.join("\n")}`;
     }
   }
 
-  function saveToVault() {
+  async function saveToVault() {
     if (!hydrated) {
       return;
     }
 
-    saveVaultRecord({
+    setMessage("Saving launch board to the Vault.");
+    await saveVaultRecord({
       title: `${profile.dropName} Launch Board`,
       category: "Launch proof",
       notes: buildReport()

@@ -3,6 +3,8 @@ node_modules
 out
 dist
 coverage
+.agents
+.codex
 .env
 .env.*
 !.env.example
@@ -12,5 +14,6 @@ yarn-error.log*
 pnpm-debug.log*
 dev-server*.log
 *.tsbuildinfo
+.loomwire-storage
 .DS_Store
 Thumbs.db
