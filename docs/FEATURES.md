@@ -12,6 +12,9 @@
   room path, and Vault save action.
 - Brand Critic with live scorecard, critique report copy action, and Vault save
   action.
+- Launch Board with latest Atelier-system import, editable release profile,
+  milestone proof tasks, readiness scoring, drop math, JSON export, copy action,
+  and Vault save action.
 - Archive and Agent pages for product story and operating model.
 
 ## Original Site Art
@@ -29,4 +32,5 @@
 - Home -> Gallery -> Select painting -> Download Painting -> Save to Vault.
 - Home -> Cultural Map -> Toggle territories -> Save to Vault.
 - Home -> Critic -> Change fields -> Copy Report -> Save to Vault.
+- Home -> Launch Board -> Toggle proof tasks -> Copy Brief -> Export -> Save to Vault.
 - Home -> Vault -> Unlock -> Seal Evidence -> Export -> Lock.

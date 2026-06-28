@@ -7,6 +7,7 @@ import {
   DoorOpen,
   Images,
   LockKeyhole,
+  Rocket,
   Siren,
   Sparkles
 } from "lucide-react";
@@ -14,6 +15,7 @@ import {
 const navItems = [
   { href: "/atelier", label: "Atelier", icon: Sparkles },
   { href: "/rooms", label: "Rooms", icon: DoorOpen },
+  { href: "/launch-board", label: "Launch", icon: Rocket },
   { href: "/vault", label: "Vault", icon: LockKeyhole },
   { href: "/gallery", label: "Gallery", icon: Images },
   { href: "/cultural-map", label: "Map", icon: Compass },

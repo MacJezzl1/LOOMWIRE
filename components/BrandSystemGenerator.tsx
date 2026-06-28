@@ -1,10 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import {
   Archive,
   BookOpen,
   Brain,
+  CalendarCheck,
   ChevronRight,
   Copy,
   Download,
@@ -183,6 +185,13 @@ export function BrandSystemGenerator() {
     setApiKey(stored || "");
     setRememberKey(Boolean(stored));
   }, [provider]);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "loomwire-latest-brand-system",
+      JSON.stringify(system)
+    );
+  }, [system]);
 
   function update<K extends keyof BrandBrief>(key: K, value: BrandBrief[K]) {
     setBrief((current) => ({ ...current, [key]: value }));
@@ -572,6 +581,10 @@ export function BrandSystemGenerator() {
                 notes: `Generated brand system. Manifesto: ${system.manifesto}. Product drop: ${system.productDrop.name}. Social bio: ${system.socialBio}`
               }}
             />
+            <Link className="btn btn-ghost" href="/launch-board">
+              <CalendarCheck size={18} />
+              Open Launch Board
+            </Link>
             <div className="rounded-md border border-paper/10 bg-paper/[0.035] p-3 text-sm leading-relaxed text-bone">
               Social bio: {system.socialBio}
             </div>

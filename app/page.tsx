@@ -7,6 +7,7 @@ import {
   Globe2,
   Images,
   LockKeyhole,
+  Rocket,
   Siren,
   Sparkles
 } from "lucide-react";
@@ -39,6 +40,12 @@ const featureLinks = [
     title: "AI Brand Critic",
     icon: Siren,
     text: "A harsh working critic that scores name, audience, product clarity, and hero copy."
+  },
+  {
+    href: "/launch-board",
+    title: "Launch Board",
+    icon: Rocket,
+    text: "Turn the latest brand system into release tasks, readiness score, drop math, export, and Vault proof."
   }
 ];
 
@@ -217,7 +224,7 @@ export default function Home() {
               decisions that can be saved back into the Creator Proof Vault.
             </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {featureLinks.map(({ href, title, icon: Icon, text }) => (
               <Link
                 key={href}
@@ -284,6 +291,7 @@ export default function Home() {
               <span>Lookbook as Website</span>
               <span>Cultural Map</span>
               <span>AI Brand Critic</span>
+              <span>Launch Board</span>
               <span>Drop Room</span>
               <span>Brand System Generator</span>
             </div>

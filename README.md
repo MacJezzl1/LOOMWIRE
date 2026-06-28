@@ -43,6 +43,8 @@ creation, launch planning, and archive records.
 - Adds an interactive Cultural Map that scores cultural signal and saves the
   selected territories to the Vault.
 - Adds a working AI Brand Critic for name, audience, product, and copy checks.
+- Adds a Launch Board that turns the latest Atelier system into release tasks,
+  readiness scoring, drop math, JSON export, and Vault proof.
 - Chooses a first product blank and turns it into a launchable drop.
 - Produces a lookbook outline, social bio, launch plan, cultural map, and Brand DNA Score.
 - Supports bring-your-own-key AI lanes for OpenAI, Claude, OpenRouter, and Groq.
@@ -63,6 +65,7 @@ creation, launch planning, and archive records.
 - `/gallery` - original paintings and artwork wall.
 - `/cultural-map` - interactive cultural territory mapper.
 - `/critic` - working brand critic and scorecard.
+- `/launch-board` - release planner with tasks, scoring, commerce math, export, and Vault save.
 - `/agents` - multi-agent system.
 - `/archive` - version history and cultural memory.
 

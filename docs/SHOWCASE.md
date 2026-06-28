@@ -10,7 +10,7 @@ LOOMWIRE is positioned as:
 1. Enter through the gallery-style homepage.
 2. Walk the dedicated pages for the Name Room, IP Room, Studio, Blank Room,
    Lookbook Engine, Drop Room, Gallery, Cultural Map, Brand Critic, Agents,
-   Archive, and Vault.
+   Launch Board, Archive, and Vault.
 3. Enter a raw brand idea in the Atelier.
 4. Choose industry, audience, style, target, product blank, mood, price level,
    and long-term vision.
@@ -18,7 +18,9 @@ LOOMWIRE is positioned as:
 6. Generate a complete brand system.
 7. Save the generated system, Cultural Map, Gallery artwork, or Brand Critic
    report into the Creator Proof Vault.
-8. Unlock the Creator Proof Vault, timestamp evidence, and export JSON.
+8. Open the Launch Board to turn the latest Atelier system into release tasks,
+   drop math, campaign readiness, export JSON, and Vault proof.
+9. Unlock the Creator Proof Vault, timestamp evidence, and export JSON.
 
 ## Strong First Use Case
 
@@ -39,6 +41,7 @@ Output:
 - Lookbook outline.
 - Website hero copy.
 - Launch plan.
+- Launch Board readiness score and drop math.
 - Social bio.
 - Brand DNA Score.
 - AI Brand Critic notes.
@@ -66,6 +69,7 @@ section, browser icon metadata, Open Graph metadata, and GitHub README preview.
 - Gallery: original LOOMWIRE paintings for the site and GitHub showcase.
 - Cultural Map: interactive culture selector and score.
 - Brand Critic: working critique engine.
+- Launch Board: release planner with proof tasks, commerce math, and Vault save.
 - Vault: local proof timeline with artful padlock and JSON export.
 - Agents: multi-agent operating model.
 - Archive: museum memory and version history.
