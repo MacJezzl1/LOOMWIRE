@@ -234,7 +234,7 @@ export function LaunchBoard() {
     profileFromSystem(fallbackSystem)
   );
   const [checked, setChecked] = useState<Record<string, boolean>>(initialChecked);
-  const [message, setMessage] = useState("Launch board ready.");
+  const [message, setMessage] = useState("Loading launch board state.");
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
@@ -258,6 +258,7 @@ export function LaunchBoard() {
       setChecked(initialChecked);
     } finally {
       setHydrated(true);
+      setMessage("Launch board ready.");
     }
   }, []);
 
@@ -311,6 +312,10 @@ export function LaunchBoard() {
   }
 
   function loadLatestSystem() {
+    if (!hydrated) {
+      return;
+    }
+
     const latest = readLatestSystem();
     setBrandSystem(latest);
     setProfile(profileFromSystem(latest));
@@ -318,6 +323,10 @@ export function LaunchBoard() {
   }
 
   function resetBoard() {
+    if (!hydrated) {
+      return;
+    }
+
     const nextProfile = profileFromSystem(brandSystem);
     setProfile(nextProfile);
     setChecked(initialChecked);
@@ -355,11 +364,23 @@ ${brandSystem.positioning.join("\n")}`;
   }
 
   async function copyReport() {
-    await navigator.clipboard.writeText(buildReport());
-    setMessage("Launch brief copied.");
+    if (!hydrated) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(buildReport());
+      setMessage("Launch brief copied.");
+    } catch {
+      setMessage("Clipboard is unavailable. Use export or save to Vault instead.");
+    }
   }
 
   function saveToVault() {
+    if (!hydrated) {
+      return;
+    }
+
     saveVaultRecord({
       title: `${profile.dropName} Launch Board`,
       category: "Launch proof",
@@ -403,6 +424,7 @@ ${brandSystem.positioning.join("\n")}`;
                 </span>
                 <input
                   className="field px-3 py-3 text-sm"
+                  disabled={!hydrated}
                   value={profile.brandName}
                   onChange={(event) => updateProfile("brandName", event.target.value)}
                 />
@@ -413,6 +435,7 @@ ${brandSystem.positioning.join("\n")}`;
                 </span>
                 <input
                   className="field px-3 py-3 text-sm"
+                  disabled={!hydrated}
                   value={profile.dropName}
                   onChange={(event) => updateProfile("dropName", event.target.value)}
                 />
@@ -425,6 +448,7 @@ ${brandSystem.positioning.join("\n")}`;
               </span>
               <input
                 className="field px-3 py-3 text-sm"
+                disabled={!hydrated}
                 value={profile.blank}
                 onChange={(event) => updateProfile("blank", event.target.value)}
               />
@@ -436,6 +460,7 @@ ${brandSystem.positioning.join("\n")}`;
               </span>
               <textarea
                 className="field min-h-[94px] px-3 py-3 text-sm"
+                disabled={!hydrated}
                 value={profile.audience}
                 onChange={(event) => updateProfile("audience", event.target.value)}
               />
@@ -447,6 +472,7 @@ ${brandSystem.positioning.join("\n")}`;
               </span>
               <input
                 className="field px-3 py-3 text-sm"
+                disabled={!hydrated}
                 value={profile.channel}
                 onChange={(event) => updateProfile("channel", event.target.value)}
               />
@@ -467,6 +493,7 @@ ${brandSystem.positioning.join("\n")}`;
                     className="field px-3 py-3 text-sm"
                     type="number"
                     min={0}
+                    disabled={!hydrated}
                     value={value}
                     onChange={(event) =>
                       updateProfile(
@@ -481,17 +508,28 @@ ${brandSystem.positioning.join("\n")}`;
           </div>
 
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <button type="button" className="btn btn-primary" onClick={saveToVault}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              disabled={!hydrated}
+              onClick={saveToVault}
+            >
               <Save size={18} />
               Save to Vault
             </button>
-            <button type="button" className="btn btn-ghost" onClick={copyReport}>
+            <button
+              type="button"
+              className="btn btn-ghost"
+              disabled={!hydrated}
+              onClick={copyReport}
+            >
               <Copy size={18} />
               Copy Brief
             </button>
             <button
               type="button"
               className="btn btn-ghost"
+              disabled={!hydrated}
               onClick={() => downloadJson(profile, checked)}
             >
               <Download size={18} />
@@ -500,11 +538,21 @@ ${brandSystem.positioning.join("\n")}`;
           </div>
 
           <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-            <button type="button" className="btn btn-ghost" onClick={loadLatestSystem}>
+            <button
+              type="button"
+              className="btn btn-ghost"
+              disabled={!hydrated}
+              onClick={loadLatestSystem}
+            >
               <Sparkles size={18} />
               Load Atelier System
             </button>
-            <button type="button" className="btn btn-ghost" onClick={resetBoard}>
+            <button
+              type="button"
+              className="btn btn-ghost"
+              disabled={!hydrated}
+              onClick={resetBoard}
+            >
               <RotateCcw size={18} />
               Reset Board
             </button>
@@ -612,6 +660,7 @@ ${brandSystem.positioning.join("\n")}`;
                     <input
                       type="checkbox"
                       className="mt-1 h-4 w-4 shrink-0 accent-[#b7ff4a]"
+                      disabled={!hydrated}
                       checked={Boolean(checked[task.id])}
                       onChange={(event) =>
                         setChecked((current) => ({

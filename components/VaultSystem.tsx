@@ -65,26 +65,32 @@ function downloadVault(entries: VaultEntry[]) {
 export function VaultSystem() {
   const [unlocked, setUnlocked] = useState(false);
   const [phrase, setPhrase] = useState("");
-  const [entries, setEntries] = useState<VaultEntry[]>(sampleEntries);
+  const [entries, setEntries] = useState<VaultEntry[]>([]);
+  const [hydrated, setHydrated] = useState(false);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(categories[0]);
   const [notes, setNotes] = useState("");
   const [message, setMessage] = useState("Vault sealed.");
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("loomwire-vault-entries");
-    if (stored) {
-      try {
-        setEntries(JSON.parse(stored) as VaultEntry[]);
-      } catch {
-        setEntries(sampleEntries);
-      }
+    try {
+      const stored = window.localStorage.getItem("loomwire-vault-entries");
+      const parsed = stored ? (JSON.parse(stored) as VaultEntry[]) : null;
+      setEntries(Array.isArray(parsed) && parsed.length > 0 ? parsed : sampleEntries);
+    } catch {
+      setEntries(sampleEntries);
+    } finally {
+      setHydrated(true);
     }
   }, []);
 
   useEffect(() => {
+    if (!hydrated) {
+      return;
+    }
+
     window.localStorage.setItem("loomwire-vault-entries", JSON.stringify(entries));
-  }, [entries]);
+  }, [entries, hydrated]);
 
   const hash = useMemo(() => {
     const seed = entries.map((entry) => `${entry.id}:${entry.createdAt}`).join("|");

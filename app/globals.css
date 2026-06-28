@@ -142,6 +142,11 @@ canvas {
   box-shadow: 0 0 0 3px rgba(183, 255, 74, 0.09);
 }
 
+.field:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
 .field::placeholder {
   color: rgba(216, 208, 191, 0.55);
 }
@@ -163,6 +168,12 @@ canvas {
 .btn:hover {
   transform: translateY(-1px);
   border-color: rgba(183, 255, 74, 0.7);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+  transform: none;
 }
 
 .btn-primary {

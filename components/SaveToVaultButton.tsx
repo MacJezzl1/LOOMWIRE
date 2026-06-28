@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Archive, Check } from "lucide-react";
 
 type VaultRecordInput = {
@@ -44,12 +44,22 @@ export function SaveToVaultButton({
   className?: string;
 }) {
   const [saved, setSaved] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    setReady(true);
+  }, []);
 
   return (
     <button
       type="button"
       className={className}
+      disabled={!ready}
       onClick={() => {
+        if (!ready) {
+          return;
+        }
+
         saveVaultRecord(record);
         setSaved(true);
         window.setTimeout(() => setSaved(false), 1800);
