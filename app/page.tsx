@@ -7,6 +7,7 @@ import {
   Globe2,
   Images,
   LockKeyhole,
+  PlugZap,
   Rocket,
   ShoppingBag,
   Siren,
@@ -47,6 +48,12 @@ const featureLinks = [
     title: "Launch Board",
     icon: Rocket,
     text: "Turn the latest brand system into release tasks, readiness score, drop math, export, and Vault proof."
+  },
+  {
+    href: "/connections",
+    title: "App Dock",
+    icon: PlugZap,
+    text: "Prepare connection kits for Shopify, Stripe, Printful, Supabase, Notion, Discord, GitHub, Netlify, and more."
   },
   {
     href: "/commerce",
@@ -231,7 +238,7 @@ export default function Home() {
               decisions that can be saved back into the Creator Proof Vault.
             </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {featureLinks.map(({ href, title, icon: Icon, text }) => (
               <Link
                 key={href}
@@ -300,6 +307,7 @@ export default function Home() {
               <span>AI Brand Critic</span>
               <span>Launch Board</span>
               <span>Commerce Connector</span>
+              <span>App Dock</span>
               <span>Drop Room</span>
               <span>Brand System Generator</span>
             </div>

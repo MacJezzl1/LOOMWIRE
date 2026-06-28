@@ -44,6 +44,15 @@ The connector creates draft products only. Users should review media, variants,
 shipping, taxes, inventory, legal/IP checks, and publishing settings in Shopify
 before making a product live.
 
+## App Dock
+
+`/connections` exposes the broader App Dock. Shopify is live through
+`/commerce`; other apps generate setup kits, env templates, required-field
+checks, and Vault proof through `/api/integrations`.
+
+No third-party app token is required in Netlify environment variables unless you
+choose to turn a kit-ready lane into a live connector.
+
 ## Storage
 
 The Creator Proof Vault is local-first and release-ready:
@@ -70,7 +79,8 @@ npm audit
 
 `npm run smoke` starts `next start` on a temporary local port after a build,
 checks every route, and verifies that `/api/vault` can save and reload a record.
-It also verifies provider status and Shopify draft-payload preparation.
+It also verifies provider status, Shopify draft-payload preparation, and App
+Dock integration-kit generation.
 
 To test an already-running deployment:
 

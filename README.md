@@ -25,6 +25,8 @@ creation, launch planning, and archive records.
 
 ![LOOMWIRE Commerce Room preview](docs/showcase/loomwire-commerce.png)
 
+![LOOMWIRE App Dock preview](docs/showcase/loomwire-connections.png)
+
 ## Original Gallery
 
 | Name Room | Cultural Map | Drop Room |
@@ -50,6 +52,9 @@ creation, launch planning, and archive records.
 - Adds a Commerce Room that turns the latest brand system into a Shopify-ready
   draft product kit, store connection test, launch copy, tags, SEO, export, and
   Vault proof.
+- Adds an App Dock for connection kits across Shopify, Stripe, Printful,
+  Supabase, Notion, Airtable, Google Drive, Discord, Mailchimp, Zapier, GitHub,
+  Netlify, Figma, and more.
 - Chooses a first product blank and turns it into a launchable drop.
 - Produces a lookbook outline, social bio, launch plan, cultural map, and Brand DNA Score.
 - Supports bring-your-own-key AI lanes for OpenAI, Claude, OpenRouter, and Groq.
@@ -75,6 +80,7 @@ creation, launch planning, and archive records.
 - `/cultural-map` - interactive cultural territory mapper.
 - `/critic` - working brand critic and scorecard.
 - `/launch-board` - release planner with tasks, scoring, commerce math, export, and Vault save.
+- `/connections` - App Dock for integration kits, credential checklists, env templates, and Vault proof.
 - `/commerce` - Shopify commerce connector for draft product kits and store tests.
 - `/agents` - multi-agent system.
 - `/archive` - version history and cultural memory.
@@ -91,6 +97,8 @@ creation, launch planning, and archive records.
 - **Creator Proof Vault**: locked local archive for evidence records and export.
 - **Commerce Room**: Shopify-ready draft product builder, connection test, export,
   and launch evidence capture.
+- **App Dock**: integration kits for commerce, payments, production, storage,
+  content, community, automation, and hosting tools.
 
 ## AI Provider Model
 
@@ -110,6 +118,7 @@ export the kit, and save commerce proof to the Vault. Tokens are not stored on
 the server.
 
 See [docs/COMMERCE.md](docs/COMMERCE.md) for Shopify setup.
+See [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) for the broader app stack.
 
 ## Storage And Release
 

@@ -22,7 +22,9 @@ LOOMWIRE is positioned as:
    drop math, campaign readiness, export JSON, and Vault proof.
 9. Open the Commerce Room to prepare a Shopify draft product kit, test a store
    connection, export JSON, and save commerce proof.
-10. Unlock the Creator Proof Vault, timestamp evidence, and export JSON.
+10. Open the App Dock to prepare the rest of the stack: payments, production,
+    storage, content, community, automation, hosting, and design systems.
+11. Unlock the Creator Proof Vault, timestamp evidence, and export JSON.
 
 ## Strong First Use Case
 
@@ -41,6 +43,8 @@ Output:
 - Moodboard and palette language.
 - Product drop idea.
 - Shopify-ready draft commerce kit.
+- App connection kits for Stripe, Printful, Supabase, Notion, Discord, GitHub,
+  Netlify, Figma, and more.
 - Lookbook outline.
 - Website hero copy.
 - Launch plan.
@@ -74,6 +78,8 @@ section, browser icon metadata, Open Graph metadata, and GitHub README preview.
 - Brand Critic: working critique engine.
 - Launch Board: release planner with proof tasks, commerce math, and Vault save.
 - Commerce: Shopify draft product kit, store test, export, and Vault proof.
+- App Dock: broader tool-stack planner with setup kits, env maps, docs links,
+  local connected state, export, and Vault proof.
 - Vault: local proof timeline with artful padlock and JSON export.
 - Agents: multi-agent operating model.
 - Archive: museum memory and version history.

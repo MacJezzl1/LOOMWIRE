@@ -19,6 +19,7 @@ const routes = [
   "/cultural-map",
   "/critic",
   "/launch-board",
+  "/connections",
   "/commerce",
   "/agents",
   "/archive"
@@ -191,6 +192,48 @@ async function checkShopifyApi() {
     : ["POST /api/shopify prepare did not return a draft product payload"];
 }
 
+async function checkIntegrationsApi() {
+  const catalogResponse = await fetchWithTimeout(`${baseUrl}/api/integrations`);
+
+  if (!catalogResponse.ok) {
+    return [`GET /api/integrations returned ${catalogResponse.status}`];
+  }
+
+  const catalog = await catalogResponse.json();
+  const apps = Array.isArray(catalog.apps) ? catalog.apps : [];
+  const hasExpectedApps =
+    apps.some((app) => app.id === "shopify") &&
+    apps.some((app) => app.id === "stripe") &&
+    apps.some((app) => app.id === "supabase");
+
+  if (!hasExpectedApps) {
+    return ["GET /api/integrations did not return the expected app catalog"];
+  }
+
+  const kitResponse = await fetchWithTimeout(`${baseUrl}/api/integrations`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: "prepare",
+      appId: "stripe",
+      credentials: {
+        STRIPE_SECRET_KEY: "sk_test_smoke",
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: "pk_test_smoke"
+      }
+    })
+  });
+
+  if (!kitResponse.ok) {
+    return [`POST /api/integrations prepare returned ${kitResponse.status}`];
+  }
+
+  const kit = await kitResponse.json();
+
+  return kit.kit?.appId === "stripe" && kit.credentialStatus?.ready
+    ? []
+    : ["POST /api/integrations did not return a ready Stripe kit"];
+}
+
 let server;
 
 try {
@@ -216,7 +259,8 @@ try {
     ...(await checkRoutes()),
     ...(await checkVaultApi()),
     ...(await checkProviderApi()),
-    ...(await checkShopifyApi())
+    ...(await checkShopifyApi()),
+    ...(await checkIntegrationsApi())
   ];
 
   if (failures.length > 0) {
