@@ -50,33 +50,33 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden min-w-0 items-center gap-0.5 xl:flex">
           {navItems.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
-              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent px-2.5 text-xs font-bold uppercase tracking-[0.14em] text-bone/75 transition hover:border-paper/10 hover:bg-paper/[0.05] hover:text-volt"
+              className="inline-flex min-h-10 min-w-0 items-center gap-1 rounded-md border border-transparent px-1.5 text-[0.68rem] font-bold uppercase tracking-[0.08em] text-bone/75 transition hover:border-paper/10 hover:bg-paper/[0.05] hover:text-volt 2xl:gap-2 2xl:px-2.5 2xl:text-xs 2xl:tracking-[0.14em]"
             >
-              <Icon size={14} />
-              {label}
+              <Icon size={13} className="shrink-0 2xl:size-[14px]" />
+              <span className="truncate">{label}</span>
             </Link>
           ))}
         </nav>
 
-        <Link className="btn btn-primary hidden sm:inline-flex" href="/atelier">
+        <Link className="btn btn-primary hidden xl:inline-flex" href="/atelier">
           <Sparkles size={17} />
           Enter
         </Link>
       </div>
-      <nav className="atelier-shell flex gap-2 overflow-x-auto border-t border-paper/10 py-2 lg:hidden">
+      <nav className="atelier-shell grid grid-cols-3 gap-2 border-t border-paper/10 py-2 sm:grid-cols-4 md:grid-cols-6 xl:hidden">
         {navItems.map(({ href, label, icon: Icon }) => (
           <Link
             key={href}
             href={href}
-            className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-md border border-paper/10 bg-paper/[0.04] px-3 text-xs font-bold uppercase tracking-[0.16em] text-bone/80"
+            className="inline-flex min-h-9 min-w-0 items-center justify-center gap-1.5 rounded-md border border-paper/10 bg-paper/[0.04] px-2 text-[0.68rem] font-bold uppercase tracking-[0.08em] text-bone/80"
           >
-            <Icon size={13} />
-            {label}
+            <Icon size={13} className="shrink-0" />
+            <span className="truncate">{label}</span>
           </Link>
         ))}
       </nav>

@@ -62,7 +62,7 @@ creation, launch planning, and archive records.
 - Shows AI provider readiness so users know when a hosted server key, BYO key,
   free engine, or local model is being used.
 - Includes Netlify release config, security headers, smoke tests, and a
-  local-first Vault API backed by Netlify Blobs in production.
+  responsive viewport audit backed by Netlify Blobs in production.
 
 ## Pages
 
@@ -140,6 +140,7 @@ Then open [http://127.0.0.1:3000](http://127.0.0.1:3000).
 npm run typecheck
 npm run build
 npm run smoke
+npm run responsive
 npm audit
 ```
 

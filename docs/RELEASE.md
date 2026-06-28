@@ -74,6 +74,7 @@ Run:
 npm run typecheck
 npm run build
 npm run smoke
+npm run responsive
 npm audit
 ```
 
@@ -81,6 +82,10 @@ npm audit
 checks every route, and verifies that `/api/vault` can save and reload a record.
 It also verifies provider status, Shopify draft-payload preparation, and App
 Dock integration-kit generation.
+
+`npm run responsive` starts the built app and checks every main route at phone,
+tablet, desktop, large desktop, and wide desktop widths for horizontal overflow
+or off-canvas layout elements.
 
 To test an already-running deployment:
 

@@ -202,13 +202,13 @@ export function IntegrationDock() {
           />
         </label>
 
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+        <div className="mt-4 flex flex-wrap gap-2 pb-1">
           {categories.map((item) => (
             <button
               key={item}
               type="button"
               onClick={() => setCategory(item)}
-              className={`min-h-9 shrink-0 rounded-md border px-3 text-xs font-bold uppercase tracking-[0.14em] transition ${
+              className={`min-h-9 min-w-0 rounded-md border px-2.5 text-[0.68rem] font-bold uppercase tracking-[0.1em] transition sm:px-3 sm:text-xs sm:tracking-[0.14em] ${
                 category === item
                   ? "border-volt bg-volt/14 text-paper"
                   : "border-paper/10 bg-paper/[0.04] text-bone/75 hover:border-wire/70"

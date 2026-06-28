@@ -28,6 +28,8 @@
 - Netlify release configuration, security headers, route smoke test, Vault API,
   provider API, Shopify payload smoke tests, integration API smoke tests, and
   clean npm audit.
+- Responsive QA script that checks every main route at phone, tablet, desktop,
+  large desktop, and wide desktop widths for horizontal overflow.
 
 ## Original Site Art
 
@@ -50,3 +52,5 @@
 - Home -> Vault -> Unlock -> Seal Evidence -> Export -> Lock.
 - `npm run smoke` -> starts production server -> checks all routes -> verifies
   `/api/vault`, `/api/providers`, `/api/shopify`, and `/api/integrations`.
+- `npm run responsive` -> starts production server -> checks every main route
+  across five viewport widths.

@@ -437,7 +437,7 @@ export function BrandSystemGenerator() {
                 type="checkbox"
                 checked={rememberKey}
                 onChange={(event) => setRememberKey(event.target.checked)}
-                className="mt-1 accent-[#b7ff4a]"
+                className="mt-0.5 h-5 w-5 shrink-0 accent-[#b7ff4a]"
               />
               Remember this key in this browser only. Leave empty to use the
               hosted server key when one is configured.

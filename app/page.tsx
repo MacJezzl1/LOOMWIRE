@@ -69,12 +69,12 @@ export default function Home() {
       <section className="relative min-h-[calc(100vh-65px)] border-b border-paper/10">
         <AtelierScene />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,7,5,0.96)_0%,rgba(7,7,5,0.74)_48%,rgba(7,7,5,0.22)_100%)]" />
-        <div className="atelier-shell relative z-10 grid min-h-[calc(100vh-65px)] gap-8 py-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-          <div className="max-w-4xl">
-            <p className="mb-5 inline-flex rounded border border-volt/50 bg-volt/10 px-3 py-2 text-xs font-black uppercase tracking-[0.24em] text-volt">
+        <div className="atelier-shell relative z-10 grid min-h-[calc(100vh-65px)] grid-cols-[minmax(0,1fr)] gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center">
+          <div className="min-w-0 max-w-4xl">
+            <p className="mb-5 inline-flex max-w-full whitespace-normal rounded border border-volt/50 bg-volt/10 px-3 py-2 text-xs font-black uppercase tracking-[0.2em] text-volt sm:tracking-[0.24em]">
               Turn an idea into a protected cultural system.
             </p>
-            <h1 className="editorial-heading max-w-[14ch] text-5xl leading-[0.95] text-paper sm:max-w-[18ch] sm:text-6xl xl:text-7xl">
+            <h1 className="editorial-heading max-w-[14ch] text-[2.7rem] leading-[0.98] text-paper sm:max-w-[18ch] sm:text-6xl sm:leading-[0.95] xl:text-7xl">
               <span className="block">BUILD THE NAME.</span>
               <span className="block">PROTECT THE IDEA.</span>
               <span className="block">DESIGN THE WORLD.</span>
@@ -85,12 +85,12 @@ export default function Home() {
               artists, designers, musicians, fashion labels, and cultural
               builders turning raw ideas into protected, visual, sellable worlds.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link className="btn btn-primary" href="/atelier">
+            <div className="mt-7 flex min-w-0 flex-col gap-3 sm:flex-row">
+              <Link className="btn btn-primary w-full sm:w-auto" href="/atelier">
                 <Sparkles size={18} />
                 Enter the Atelier
               </Link>
-              <Link className="btn btn-ghost" href="/vault">
+              <Link className="btn btn-ghost w-full sm:w-auto" href="/vault">
                 <LockKeyhole size={18} />
                 Open the Vault
               </Link>
@@ -98,7 +98,7 @@ export default function Home() {
           </div>
 
           <Link href="/rooms/lookbook-engine" className="paper-panel group p-3 shadow-atelier">
-            <div className="relative aspect-[4/5] min-h-[440px] overflow-hidden rounded-md border border-paper/10 bg-carbon">
+            <div className="relative aspect-[4/5] min-h-[360px] overflow-hidden rounded-md border border-paper/10 bg-carbon sm:min-h-[440px]">
               <Image
                 src="/art/loomwire-poster-collage.png"
                 alt="Original LOOMWIRE poster collage showing a street-art brand archive."
